@@ -76,23 +76,23 @@ class TicTacToe
     end
   end
 
-  def won?(board)
+  def won?(@board)
     WIN_COMBINATIONS.any? do |win_combination|
-      if board[win_combination[0]]=="X" && board[win_combination[1]]=="X" && board[win_combination[2]]=="X"
+      if @board[win_combination[0]]=="X" && @board[win_combination[1]]=="X" && @board[win_combination[2]]=="X"
         return win_combination
-      elsif board[win_combination[0]]=="O" && board[win_combination[1]]=="O" && board[win_combination[2]]=="O"
+      elsif @board[win_combination[0]]=="O" && @board[win_combination[1]]=="O" && @board[win_combination[2]]=="O"
         return win_combination
       end
     end
   end
 
-  def full?(board)
-    board.all? {|index| index!=" "}
+  def full?(@board)
+    @board.all? {|index| index!=" "}
   end
 
-  def draw?(board)
-    won = won?(board)
-    full = full?(board)
+  def draw?(@board)
+    won = won?(@board)
+    full = full?(@board)
     if won==false && full==true
       return true
     elsif won==false && full==false
@@ -102,29 +102,29 @@ class TicTacToe
     end
   end
 
-  def over?(board)
-    if won?(board)!=false || draw?(board)==true || full?(board)==true
+  def over?(@board)
+    if won?(@board)!=false || draw?(@board)==true || full?(@board)==true
       return true
     else
       return false
     end
   end
 
-  def winner(board)
-    if won?(board)!=false
-      return board[won?(board)[0]]
+  def winner(@board)
+    if won?(@board)!=false
+      return @board[won?(@board)[0]]
     end
   end
 
-  def play(board)
-    until over?(board)==true
-      turn(board)
+  def play(@board)
+    until over?(@board)==true
+      turn(@board)
     end
-    if won?(board)!=true && winner(board)=="X"
+    if won?(@board)!=true && winner(@board)=="X"
       puts "Congratulations X!"
-    elsif won?(board)!=true && winner(board)=="O"
+    elsif won?(@board)!=true && winner(@board)=="O"
       puts "Congratulations O!"
-    else draw?(board)==true
+    else draw?(@board)==true
       puts "Cat's Game!"
     end
   end
